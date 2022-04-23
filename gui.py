@@ -7,12 +7,17 @@ class Gui:
         pass
 
     def show_board(self, board):
+        string_to_print = ""
         for row in range(6):
             for col in range(7):
                 if board[row][col] == -1:
-                    board[row][col] = 2
-        for file in range(6):
-            print(board[file])
+                    string_to_print += "X"
+                elif board[row][col] == 1:
+                    string_to_print += "O"
+                else:
+                    string_to_print += "_"
+            string_to_print += "\n"
+        print(string_to_print)
 
     def take_move(self):
         """Let user input numers 1-7"""

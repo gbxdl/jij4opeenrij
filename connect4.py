@@ -26,6 +26,12 @@ class Gameplay:
             move = self.gui.take_move()
         else:
             move = self.ai.make_ai_move(self.board, self.on_move)
+
+        if not self.is_legal_move(move):
+            print("not a legal move")
+            self.run_game()
+            return
+
         move_row, move_column = self.make_move(move)
 
         if self.game_over(move_row, move_column):
@@ -43,6 +49,11 @@ class Gameplay:
             if self.board[row][col] == 0:
                 self.board[row][col] = self.on_move
                 return row, col
+
+    def is_legal_move(self, move):
+        if 0 not in self.board[:, move]:
+            return False
+        return True
 
     def game_over(self, move_row, move_column) -> bool:
         """Check if there's a 4 in a rows based on last move."""
